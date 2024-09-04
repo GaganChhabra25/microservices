@@ -90,3 +90,8 @@ networks:
 networks:
 eazybank:
 driver: "bridge"
+
+### **Healthchecks**
+http://localhost:9000/api/health
+http://localhost:8080/api/health
+http://localhost:8090/api/health

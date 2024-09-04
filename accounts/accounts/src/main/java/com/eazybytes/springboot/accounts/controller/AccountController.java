@@ -7,6 +7,7 @@ import com.eazybytes.springboot.accounts.service.IAccountService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +21,22 @@ public class AccountController {
     @Autowired
     private IAccountService accountService;
 
+    @Value("${build.version}")
+    private String buildVersion;
+
     @GetMapping("sayHello")
     public String sayHello() {
         return "Hello";
     }
 
     @GetMapping("/health")
-    public String health() {
-        return "Is healthy...";
+    public ResponseEntity<String> health() {
+        return ResponseEntity.ok("Is healthy...");
+    }
+
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildVersion() {
+        return ResponseEntity.ok(buildVersion);
     }
 
     @PostMapping("/create")
