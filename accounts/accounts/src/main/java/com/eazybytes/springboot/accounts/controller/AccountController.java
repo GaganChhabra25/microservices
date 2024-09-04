@@ -1,6 +1,7 @@
 package com.eazybytes.springboot.accounts.controller;
 
 import com.eazybytes.springboot.accounts.constants.AccountsConstants;
+import com.eazybytes.springboot.accounts.dto.AccountsContactInfoDto;
 import com.eazybytes.springboot.accounts.dto.CustomerDto;
 import com.eazybytes.springboot.accounts.dto.ResponseDto;
 import com.eazybytes.springboot.accounts.service.IAccountService;
@@ -21,6 +22,9 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
     @Autowired
     private IAccountService accountService;
+
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
 
     @Value("${build.version}")
     private String buildVersion;
@@ -48,6 +52,11 @@ public class AccountController {
         String javaVersion = environment.getProperty("JAVA_HOME");
         String mavenHome = environment.getProperty("MAVEN_HOME");
         return ResponseEntity.ok("Java version : " + javaVersion + "Maven : " + mavenHome);
+    }
+
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactDetails() {
+        return ResponseEntity.ok(accountsContactInfoDto);
     }
 
     @PostMapping("/create")

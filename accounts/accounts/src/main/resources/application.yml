@@ -18,3 +18,10 @@ spring:
 build:
   version: "1.0"
 
+accounts:
+  message: "Welcome to microservices"
+  contactDetails:
+    name: "GC - Java Architect"
+    email: "gc@gmail.com"
+    phone: 123
+
