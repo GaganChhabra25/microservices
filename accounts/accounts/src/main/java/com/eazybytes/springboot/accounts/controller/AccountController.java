@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,9 @@ public class AccountController {
     @Value("${build.version}")
     private String buildVersion;
 
+    @Autowired
+    private Environment environment;
+
     @GetMapping("sayHello")
     public String sayHello() {
         return "Hello";
@@ -37,6 +41,13 @@ public class AccountController {
     @GetMapping("/build-info")
     public ResponseEntity<String> getBuildVersion() {
         return ResponseEntity.ok(buildVersion);
+    }
+
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        String javaVersion = environment.getProperty("JAVA_HOME");
+        String mavenHome = environment.getProperty("MAVEN_HOME");
+        return ResponseEntity.ok("Java version : " + javaVersion + "Maven : " + mavenHome);
     }
 
     @PostMapping("/create")
