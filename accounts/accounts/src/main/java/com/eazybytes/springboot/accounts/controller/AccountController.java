@@ -25,6 +25,11 @@ public class AccountController {
         return "Hello";
     }
 
+    @GetMapping("/health")
+    public String health() {
+        return "Is healthy...";
+    }
+
     @PostMapping("/create")
     public ResponseEntity<ResponseDto> create(@Valid @RequestBody CustomerDto customerDto) {
         accountService.create(customerDto);

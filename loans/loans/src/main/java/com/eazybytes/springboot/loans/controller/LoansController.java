@@ -36,6 +36,11 @@ public class LoansController {
 
     private ILoansService iLoansService;
 
+    @GetMapping("/health")
+    public String health() {
+        return "Is healthy...";
+    }
+
     @Operation(
             summary = "Create Loan REST API",
             description = "REST API to create new loan inside EazyBank"

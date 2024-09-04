@@ -36,6 +36,11 @@ public class CardsController {
 
     private ICardsService iCardsService;
 
+    @GetMapping("/health")
+    public String health() {
+        return "Is healthy...";
+    }
+
     @Operation(
             summary = "Create Card REST API",
             description = "REST API to create new Card inside EazyBank"
