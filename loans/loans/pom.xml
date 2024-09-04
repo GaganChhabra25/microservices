@@ -82,7 +82,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-						<name>gaganchhabra25/loans:s4c</name>
+						<name>gaganchhabra25/${project.artifactId}:s4</name>
 					</image>
 					<excludes>
 						<exclude>
