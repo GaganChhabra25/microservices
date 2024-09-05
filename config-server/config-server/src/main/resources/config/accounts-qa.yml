@@ -1,0 +1,9 @@
+accounts:
+  message: "Welcome to microservices"
+  contactDetails:
+    name: "Nitin-QA Lead"
+    email: "nitin@gmail.com"
+    phone: 456
+
+build:
+  version: "2.0"

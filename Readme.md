@@ -95,3 +95,43 @@ driver: "bridge"
 http://localhost:9000/api/health
 http://localhost:8080/api/health
 http://localhost:8090/api/health
+
+### Spring Cloud Config
+1. Add 1 dependency - cloud server
+2. Mark main class as @EnableConfigServer
+3. Create separate folder called config to store other microservices properties file 
+4. File name pattern - <service-name>-env.yml ::: accounts-prod.yml
+5. Run server and all files will be accessible on below URL 
+   - http://localhost:8071/accounts/prod
+
+`{
+"name": "loans",
+"profiles": [
+"prod"
+],
+"label": null,
+"version": null,
+"state": null,
+"propertySources": [
+{
+"name": "classpath:/config/loans-prod.yml",
+"source": {
+"build.version": "3.0",
+"accounts.message": "Welcome to Loans prod microservices",
+"accounts.contactDetails.name": "loans prod",
+"accounts.contactDetails.email": "loansprod@gmail.com",
+"accounts.contactDetails.phone": 12
+}
+},
+{
+"name": "classpath:/config/loans.yml",
+"source": {
+"build.version": "3.0",
+"accounts.message": "Welcome to Loans microservices",
+"accounts.contactDetails.name": "loans main",
+"accounts.contactDetails.email": "loans@gmail.com",
+"accounts.contactDetails.phone": 1
+}
+}
+]
+}`
