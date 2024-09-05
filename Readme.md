@@ -202,3 +202,27 @@ phone: 789`
    }`
 6. Change property on the git repo.
 7. Refresh API call will refresh the properties
+
+#### Disadvantage : Use of manual refresh
+
+### **Refresh Configuration using Spring Cloud Bus**
+
+1. Run RabbitMQ as docker container - # latest RabbitMQ 3.13
+   `docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management`
+2. Add rabbit MQ properties to all MS
+   rabbitmq:
+   host: localhost
+   port: 5672
+   username: guest
+   password: guest
+3. Add actuator dependencies in Config server and Config clients
+4. Enable bus refresh API by adding this is all microservices 
+management:
+   endpoints:
+   web:
+   exposure:
+   include: "*"
+5. Make changes in Git repo 
+6. Execute BusRefresh - 
+
+curl --location --request POST 'http://localhost:8080/actuator/busrefresh'
