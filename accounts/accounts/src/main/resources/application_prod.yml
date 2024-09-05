@@ -1,0 +1,14 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+build:
+  version: "3.0"
+
+accounts:
+  message: "Welcome to microservices"
+  contactDetails:
+    name: "Gagan-Prod support"
+    email: "gagan@gmail.com"
+    phone: 789
