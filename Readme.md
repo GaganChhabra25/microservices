@@ -226,3 +226,9 @@ management:
 6. Execute BusRefresh - 
 
 curl --location --request POST 'http://localhost:8080/actuator/busrefresh'
+
+Disadvantage : Still manual approach 
+
+### **Refresh Configuration using Spring Cloud Bus and Spring Cloud Config monitor**
+
+1. All above changes need to be there
