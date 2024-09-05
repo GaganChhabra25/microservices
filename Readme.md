@@ -157,3 +157,26 @@ search-locations: "file:///D://Gagan//Study Material//Microservices//config-file
 `
 
 Execute - http://localhost:8071/accounts/prod
+
+##### **Encryption and Decryption of properties** 
+1. Add key to application properties of config server
+
+   encrypt:
+    key: E1A48E926757DD973DA39D5325912
+2. Encrypt the value using API - 
+
+`curl --location --request POST 'http://localhost:8071/encrypt' \
+--header 'Content-Type: text/plain' \
+--data-raw 'gagan@gmail.com'`
+
+**Response** : 2c45453d5ee9e7611c1b60b4cfe9c80f925d73651abaf3617ee4dd93c3174ebc
+3. Update the Git repo with this encrypted value 
+
+`accounts:
+message: "Welcome to microservices"
+contactDetails:
+name: "Gagan-Prod support"
+email: "{cipher}2c45453d5ee9e7611c1b60b4cfe9c80f925d73651abaf3617ee4dd93c3174ebc"
+phone: 789`
+
+4. All APIs response will be in decrypted format

@@ -12,6 +12,9 @@ spring:
           timeout: 5
           clone-on-start: true
           force-pull: true
+encrypt:
+  key: E1A48E926757DD973DA39D5325912
+
  # profiles:
  #   active: native
 #  cloud:
