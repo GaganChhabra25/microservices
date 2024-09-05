@@ -32,3 +32,8 @@ accounts:
     email: "gc@gmail.com"
     phone: 123
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

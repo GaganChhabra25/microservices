@@ -179,4 +179,26 @@ name: "Gagan-Prod support"
 email: "{cipher}2c45453d5ee9e7611c1b60b4cfe9c80f925d73651abaf3617ee4dd93c3174ebc"
 phone: 789`
 
-4. All APIs response will be in decrypted format
+4. All APIs response will be in decrypted 
+
+### **Refresh configuration at runtime using Actuator refresh path**
+
+1. Make sure actuator dependencies are present 
+2. Expose all actuator endpoints on spring boot app
+   `management:
+   endpoints:
+   web:
+   exposure:
+   include: "*"`
+3. Check all actuator APIs by : http://localhost:8080/actuator
+4. There will a refresh API - http://localhost:8080/actuator/refresh
+5. Change the Configuration properties file as
+
+`   @ConfigurationProperties(prefix = "cards")
+   @Setter@Getter
+   public class CardsContactInfoDto {
+   private String message;
+   private Map<String, String> contactDetails;
+   }`
+6. Change property on the git repo.
+7. Refresh API call will refresh the properties
