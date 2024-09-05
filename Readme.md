@@ -135,3 +135,14 @@ http://localhost:8090/api/health
 }
 ]
 }`
+
+### **Linking Config server with other microservices** 
+1. Goto Accounts microservices application.properties file
+2. Add below line 
+`   spring:
+     config:
+       import: "optional:configserver:http://localhost:8071/"`
+3. Run Accounts service application with runtime argument of Active profile
+  ` --spring.profiles.active=qa`
+4. Service will connect to Config server and fetch the QA related properties 
+5. Validate by executing : http://localhost:8080/api/contact-info
