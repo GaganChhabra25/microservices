@@ -1,7 +1,7 @@
 build:
   version: "3.0"
 
-accounts:
+loans:
   message: "Welcome to Loans prod microservices"
   contactDetails:
     name: "loans prod"

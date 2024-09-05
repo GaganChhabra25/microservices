@@ -2,6 +2,7 @@ package com.eazybytes.springboot.loans.controller;
 
 import com.eazybytes.springboot.loans.constants.LoansConstants;
 import com.eazybytes.springboot.loans.dto.ErrorResponseDto;
+import com.eazybytes.springboot.loans.dto.LoansContactInfoDto;
 import com.eazybytes.springboot.loans.dto.LoansDto;
 import com.eazybytes.springboot.loans.dto.ResponseDto;
 import com.eazybytes.springboot.loans.service.ILoansService;
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,10 +37,17 @@ import org.springframework.web.bind.annotation.*;
 public class LoansController {
 
     private ILoansService iLoansService;
+    @Autowired
+    private LoansContactInfoDto loansContactInfoDto;
 
     @GetMapping("/health")
     public String health() {
         return "Is healthy...";
+    }
+
+    @GetMapping("/contact-info")
+    public ResponseEntity<LoansContactInfoDto> getContactDetails() {
+        return ResponseEntity.ok(loansContactInfoDto);
     }
 
     @Operation(
