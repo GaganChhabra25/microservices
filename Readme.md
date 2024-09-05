@@ -232,3 +232,29 @@ Disadvantage : Still manual approach
 ### **Refresh Configuration using Spring Cloud Bus and Spring Cloud Config monitor**
 
 1. All above changes need to be there
+
+### Liveness and readiness probes
+1. Enable these by adding properties
+   management:
+   endpoints:
+   web:
+   exposure:
+   include: "*"
+   health:
+   readiness-state:
+   enabled: true
+   liveness-state:
+   enabled: true
+   endpoint:
+   health:
+   probes:
+   enabled: true
+2. Endpoint will be exposed - http://localhost:8071/actuator/health
+
+{
+"status": "UP",
+"groups": [
+"liveness",
+"readiness"
+]
+}
