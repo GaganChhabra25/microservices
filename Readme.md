@@ -146,3 +146,14 @@ http://localhost:8090/api/health
   ` --spring.profiles.active=qa`
 4. Service will connect to Config server and fetch the QA related properties 
 5. Validate by executing : http://localhost:8080/api/contact-info
+
+### **Using File system to store properties files** 
+
+`cloud:
+config:
+server:
+native:
+search-locations: "file:///D://Gagan//Study Material//Microservices//config-file
+`
+
+Execute - http://localhost:8071/accounts/prod
