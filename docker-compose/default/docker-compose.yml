@@ -1,22 +1,19 @@
 services:
+
   accounts:
     image: gaganchhabra25/accounts:s6
     container_name: accounts-microservice
     depends_on:
       configserver:
         condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "accounts"
     ports:
       - "8080:8080"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - eazybank
-    environment:
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
-      SPRING_PROFILES_ACTIVE: default
-      SPRING_APPLICATION_NAME: accounts
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
   loans:
     image: gaganchhabra25/loans:s6
     container_name: loans-microservice
@@ -25,22 +22,10 @@ services:
         condition: service_healthy
     ports:
       - "8090:8090"
-    healthcheck:
-      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - eazybank
-    environment:
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
-      SPRING_PROFILES_ACTIVE: default
-      SPRING_APPLICATION_NAME: loans
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
   cards:
     image: gaganchhabra25/cards:s6
     container_name: cards-microservice
@@ -49,22 +34,10 @@ services:
         condition: service_healthy
     ports:
       - "9000:9000"
-    healthcheck:
-      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - eazybank
-    environment:
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
-      SPRING_PROFILES_ACTIVE: default
-      SPRING_APPLICATION_NAME: cards
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
   configserver:
     image: gaganchhabra25/configserver:s6
     container_name: configserver-microservice
@@ -79,12 +52,9 @@ services:
       timeout: 5s
       retries: 10
       start_period: 10s
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - eazybank
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
   rabbit:
     image: rabbitmq:3.12-management
     hostname: rabbitmq
@@ -97,8 +67,9 @@ services:
       timeout: 5s
       retries: 10
       start_period: 10s
-    networks:
-      - eazybank
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
 
 networks:
   eazybank:

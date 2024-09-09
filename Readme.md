@@ -3,7 +3,7 @@
 - Create Docker Image - docker build . -t gaganchhabra25/accounts:s4
 - RUN container - docker run -d -p 8080:8080 5d36a504e79a
 - Run Container on different port - docker run -d -p 8080:8081 5d36a504e79a
-- **Push image to Docker Hub** - docker image push docker.io/gaganchhabra25/loans:s4
+- **Push image to Docker Hub** - d/loans:s4
 - docker compose up
 - docker compose down
 - docker compose stop
