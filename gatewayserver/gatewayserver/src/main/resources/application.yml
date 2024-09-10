@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: gatewayserver
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+
+build:
+  version: "3.0"
+
+gatewayserver:
+  message: "Welcome to gateway microservices"
+  contactDetails:
+    name: "GC - Java Architect"
+    email: "gc@gmail.com"
+    phone: 123
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      endpoint:
+        gateway:
+          enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: Gateway server
+    description: Gateway Application
+    version: 1.0.0

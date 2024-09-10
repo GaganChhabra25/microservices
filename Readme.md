@@ -265,3 +265,11 @@ Disadvantage : Still manual approach
 3. Get Specific service details eureka server : http://localhost:8070/eureka/apps/cards
 4. Deregister ms with eureka server: `curl --location --request POST 'http://localhost:8080/actuator/shutdown'`
 5. Heartbeats mechanism
+
+### **Deployment to local K8**
+
+1. kubectl config get-clusters :: docker-desktop
+2. K8 UI dashboard :https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+3. Add kubernetes-dashboard repository - helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+4. Deploy configserver by applying configserver.yml file
+5. Test endpoint : http://localhost:8071/accounts/qa
