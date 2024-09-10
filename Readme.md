@@ -264,3 +264,4 @@ Disadvantage : Still manual approach
 2. All instances that are register to Eureka server : http://localhost:8070/eureka/apps
 3. Get Specific service details eureka server : http://localhost:8070/eureka/apps/cards
 4. Deregister ms with eureka server: `curl --location --request POST 'http://localhost:8080/actuator/shutdown'`
+5. Heartbeats mechanism
