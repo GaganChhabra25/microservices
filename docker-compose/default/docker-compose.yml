@@ -1,7 +1,7 @@
 services:
 
   accounts:
-    image: gaganchhabra25/accounts:s6
+    image: gaganchhabra25/accounts:s8
     container_name: accounts-microservice
     depends_on:
       configserver:
@@ -12,22 +12,42 @@ services:
       - "8080:8080"
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
   loans:
-    image: gaganchhabra25/loans:s6
-    container_name: loans-microservice
+    image: "gaganchhabra25/loans:s8"
+    container_name: loans-ms
+    ports:
+      - "8090:8090"
     depends_on:
       configserver:
         condition: service_healthy
-    ports:
-      - "8090:8090"
+      eurekaserver:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
+
+  loans1:
+    image: "gaganchhabra25/loans:s8"
+    container_name: loans-ms1
+    ports:
+      - "8091:8090"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
 
   cards:
-    image: gaganchhabra25/cards:s6
+    image: gaganchhabra25/cards:s8
     container_name: cards-microservice
     depends_on:
       configserver:
@@ -36,10 +56,10 @@ services:
       - "9000:9000"
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
   configserver:
-    image: gaganchhabra25/configserver:s6
+    image: gaganchhabra25/configserver:s8
     container_name: configserver-microservice
     depends_on:
       rabbit:
@@ -70,6 +90,26 @@ services:
     extends:
       file: common-config.yml
       service: network-deploy-service
+
+  eurekaserver:
+    image: "gaganchhabra25/eurekaserver:s8"
+    container_name: eurekaserver-ms
+    ports:
+      - "8070:8070"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+    environment:
+      SPRING_APPLICATION_NAME: "eurekaserver"
 
 networks:
   eazybank:
